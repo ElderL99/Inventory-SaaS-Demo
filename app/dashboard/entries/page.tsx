@@ -66,7 +66,6 @@ export default function EntriesPage() {
       />
 
       {/* BOTÓN */}
-      {/* BOTÓN */}
       <div className="flex flex-col sm:flex-row sm:justify-end mb-4 gap-2">
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
@@ -100,7 +99,9 @@ export default function EntriesPage() {
                 onChange={(e) => setQuantity(Number(e.target.value))}
               />
 
-              <Button className="w-full">Guardar</Button>
+              <Button className="w-full" onClick={handleAdd}>
+                Guardar
+              </Button>
             </div>
           </DialogContent>
         </Dialog>

@@ -24,6 +24,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogDescription,
 } from "@/src/components/ui/dialog";
 
 export default function ProductsPage() {
@@ -76,6 +77,9 @@ export default function ProductsPage() {
           <DialogContent>
             <DialogHeader>
               <DialogTitle>Nuevo producto</DialogTitle>
+              <DialogDescription>
+                Agrega un nuevo producto al inventario
+              </DialogDescription>
             </DialogHeader>
 
             <div className="space-y-4">

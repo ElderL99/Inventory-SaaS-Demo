@@ -22,6 +22,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogDescription,
 } from "@/src/components/ui/dialog";
 
 function formatDate(date: string) {
@@ -75,6 +76,9 @@ export default function ExitsPage() {
           <DialogContent>
             <DialogHeader>
               <DialogTitle>Nueva salida</DialogTitle>
+              <DialogDescription>
+                Registra una salida de producto del inventario
+              </DialogDescription>
             </DialogHeader>
 
             <div className="space-y-4">
