@@ -1,0 +1,135 @@
+"use client";
+
+import { useState } from "react";
+import { v4 as uuid } from "uuid";
+
+import PageTitle from "@/src/components/ui/PageTitle";
+import { getProducts, getMovements, addMovement } from "@/src/lib/store";
+
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/src/components/ui/table";
+import { Button } from "@/src/components/ui/button";
+
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/src/components/ui/dialog";
+
+function formatDate(date: string) {
+  return new Date(date).toLocaleString("es-MX", {
+    dateStyle: "short",
+    timeStyle: "short",
+  });
+}
+
+export default function EntriesPage() {
+  const products = getProducts();
+  const movements = getMovements().filter((m) => m.type === "entry");
+
+  const [open, setOpen] = useState(false);
+  const [productId, setProductId] = useState("");
+  const [quantity, setQuantity] = useState(1);
+
+  function handleAdd() {
+    const product = products.find((p) => p.id === productId);
+    if (!product || quantity <= 0) return;
+
+    addMovement({
+      id: uuid(),
+      productId: product.id,
+      productName: product.name,
+      type: "entry",
+      quantity,
+      user: "Admin Demo",
+      createdAt: new Date().toISOString(),
+    });
+
+    setOpen(false);
+    setProductId("");
+    setQuantity(1);
+  }
+
+  return (
+    <>
+      <PageTitle
+        title="Entradas"
+        subtitle="Registro de ingresos al inventario"
+      />
+
+      {/* BOTÓN */}
+      {/* BOTÓN */}
+      <div className="flex flex-col sm:flex-row sm:justify-end mb-4 gap-2">
+        <Dialog open={open} onOpenChange={setOpen}>
+          <DialogTrigger asChild>
+            <Button className="w-full sm:w-auto">Registrar entrada</Button>
+          </DialogTrigger>
+
+          <DialogContent className="w-[95%] sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle>Nueva entrada</DialogTitle>
+            </DialogHeader>
+
+            <div className="space-y-4">
+              <select
+                className="w-full rounded-md border px-3 py-2 text-sm md:text-base"
+                value={productId}
+                onChange={(e) => setProductId(e.target.value)}
+              >
+                <option value="">Selecciona producto</option>
+                {products.map((p) => (
+                  <option key={p.id} value={p.id}>
+                    {p.name}
+                  </option>
+                ))}
+              </select>
+
+              <input
+                type="number"
+                min={1}
+                className="w-full rounded-md border px-3 py-2 text-sm md:text-base"
+                value={quantity}
+                onChange={(e) => setQuantity(Number(e.target.value))}
+              />
+
+              <Button className="w-full">Guardar</Button>
+            </div>
+          </DialogContent>
+        </Dialog>
+      </div>
+
+      {/* TABLA */}
+      <div className="rounded-2xl border border-card-border bg-card-bg">
+        <Table className="min-w-[200px]">
+          <TableHeader>
+            <TableRow>
+              <TableHead>Producto</TableHead>
+              <TableHead>Cantidad</TableHead>
+              <TableHead>Usuario</TableHead>
+              <TableHead>Fecha</TableHead>
+            </TableRow>
+          </TableHeader>
+
+          <TableBody>
+            {movements.map((m) => (
+              <TableRow key={m.id}>
+                <TableCell>{m.productName}</TableCell>
+                <TableCell>+{m.quantity}</TableCell>
+                <TableCell>{m.user}</TableCell>
+                <TableCell>{formatDate(m.createdAt)}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+    </>
+  );
+}
