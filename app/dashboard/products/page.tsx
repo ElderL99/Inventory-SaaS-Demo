@@ -57,6 +57,11 @@ export default function ProductsPage() {
     setCategory("");
   }
 
+  const filteredByCategory = products.filter((product) => {
+    if (!category) return true;
+    return product.category === category;
+  });
+
   return (
     <>
       <PageTitle title="Productos" subtitle="Listado general del inventario" />
@@ -97,6 +102,7 @@ export default function ProductsPage() {
       </div>
 
       {/* TABLA */}
+
       <div className="rounded-2xl border border-card-border bg-card-bg">
         <Table>
           <TableHeader>

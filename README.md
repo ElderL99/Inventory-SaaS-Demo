@@ -1,36 +1,134 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📦 Inventory SaaS Demo
 
-## Getting Started
+Demo funcional de un **SaaS de gestión de inventario**, construido con **Next.js (App Router) y TypeScript**, enfocado en mostrar **arquitectura real, UX profesional y diseño mobile-first**, listo para conectarse a un backend en el futuro.
 
-First, run the development server:
+Este proyecto está pensado como **demo comercial** para presentar a clientes.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 🚀 Características principales
+
+- ✅ Dashboard con métricas generales
+- 📦 Gestión de productos
+- ➕ Registro de **Entradas**
+- ➖ Registro de **Salidas**
+- 📊 Stock calculado dinámicamente a partir de movimientos
+- 👤 Registro de usuario, fecha y hora en cada movimiento
+- 🪟 Modales para creación de registros
+- 📱 **Mobile-first** (sm / md / lg)
+- 📋 Tablas responsivas con scroll interno
+- 🧠 Store en memoria simulando backend
+- 🧱 Arquitectura lista para API real
+
+---
+
+## 🧠 Concepto de stock (importante)
+
+El stock **NO se modifica directamente** en los productos.
+
+Se calcula dinámicamente a partir de:
+
+- stock inicial
+- entradas
+- salidas
+
+Esto replica el comportamiento de un **sistema real de inventarios**.
+
+---
+
+## 🛠️ Tecnologías usadas
+
+- **Next.js 16** (App Router)
+- **TypeScript**
+- **React**
+- **Tailwind CSS**
+- **shadcn/ui**
+- **Lucide Icons**
+- **clsx**
+- **uuid**
+
+---
+
+## 📁 Estructura del proyecto
+
+```
+/app
+  /dashboard
+    layout.tsx
+    page.tsx
+    /products
+    /entries
+    /exits
+
+/src
+  /components
+    /layout
+    /ui
+  /DB          # Datos mock iniciales (seed)
+  /lib
+    store.ts   # Store en memoria (backend simulado)
+    inventory.ts
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📱 Mobile-First
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+El proyecto está diseñado **desde móvil hacia desktop**:
 
-## Learn More
+- Mobile: layout compacto, scroll interno en tablas
+- Tablet: más columnas visibles
+- Desktop: vista completa del dashboard
 
-To learn more about Next.js, take a look at the following resources:
+Se evita el scroll horizontal global, manteniendo una UX limpia.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ▶️ Instalación y uso
 
-## Deploy on Vercel
+```bash
+git clone <repo-url>
+cd inventory-saas-demo
+npm install
+npm run dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Luego abre:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+http://localhost:3000/dashboard
+```
+
+---
+
+## 🧩 Estado actual
+
+✔ Demo funcional  
+✔ UI lista para mostrar a clientes  
+✔ Arquitectura preparada para backend real  
+❌ Persistencia (por ahora en memoria)
+
+---
+
+## 🔮 Próximos pasos (planeados)
+
+- Persistencia en `localStorage` o backend
+- Autenticación de usuarios
+- Roles (admin / user)
+- Exportación a Excel / PDF
+- API real (Express / NestJS)
+
+---
+
+## 📌 Nota
+
+Este proyecto es una **demo técnica y visual**.  
+Los datos se almacenan en memoria y se reinician al recargar la página.
+
+---
+
+## 👨‍💻 Autor
+
+**LC Inova**  
+Desarrolladora de software
+Proyecto creado como base para SaaS comerciales y demostraciones a clientes.
